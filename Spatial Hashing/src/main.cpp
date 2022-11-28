@@ -26,6 +26,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Frames.h"
+#include "line.h"
 
 int screenWidth = 1200, screenHeight = 700;
 bool click = false;
