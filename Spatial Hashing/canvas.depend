@@ -700,7 +700,7 @@
 
 1669497203 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\vector3.h
 
-1669749165 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\main.cpp
+1669761469 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -712,6 +712,7 @@
 	"Vector3.h"
 	"Frames.h"
 	"line.h"
+	"spatialhash.h"
 
 1669497203 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\frames.h
 	<stdio.h>
@@ -719,19 +720,21 @@
 
 1669656704 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\linegeneration.cpp
 
-1669749165 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\spatialhash.cpp
+1669761938 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\spatialhash.cpp
 	"spatialhash.h"
 
-1669749165 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\spatialhash.h
+1669761925 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\spatialhash.h
 	<stdio.h>
 	<stdlib.h>
 	<vector>
 	"Vector2.h"
+	"vector3.h"
+	"gl_canvas2d.h"
 
-1669747956 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\line.cpp
+1669762157 source:c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\line.cpp
 	"line.h"
 
-1669747964 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\line.h
+1669752144 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\line.h
 	<stdio.h>
 	<stdlib.h>
 	<vector>

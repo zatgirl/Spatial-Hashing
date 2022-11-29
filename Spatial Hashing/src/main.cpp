@@ -27,19 +27,25 @@
 #include "Vector3.h"
 #include "Frames.h"
 #include "line.h"
+#include "spatialhash.h"
 
-#define AMOUNT_LINES 50
+#define AMOUNT_LINES 500
 
 int screenWidth = 1200, screenHeight = 700;
 bool click = false;
 float fps;
 
+int AMOUNT_CELLS = 3; ///por orientação
+
 Frames *frames;
 LinesManager *linesManager;
+SpatialHashing *spatialHashing;
 
 void render()
 {
+    spatialHashing->RenderCells();
     linesManager->RenderLines();
+
     fps = frames->getFrames();
 
 }
@@ -64,6 +70,7 @@ int main(void)
 {
     frames = new Frames();
     linesManager = new LinesManager(Vector2(screenWidth, screenHeight), AMOUNT_LINES);
+    spatialHashing = new SpatialHashing(Vector2(screenWidth, screenHeight), AMOUNT_CELLS);
 
     CV::init(&screenWidth, &screenHeight, "T2 - Spatial Hashing");
     CV::run();

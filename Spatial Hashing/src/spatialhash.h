@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <vector>
 #include "Vector2.h"
+#include "vector3.h"
 
+#include "gl_canvas2d.h"
 
 class SpatialHashing
 {
@@ -15,7 +17,11 @@ public:
 
     SpatialHashing(Vector2 _screenDimensions, int _amountCells);
 
+    void RenderCells();
+
     void GenerateCells();
+
+    void DrawCells();
 
 private:
     struct Cell
@@ -23,7 +29,9 @@ private:
         Vector2 points[];
         Vector2 minBoundary;
         Vector2 maxBoundary;
+        Vector3 color;
     };
+    Cell *cell;
 };
 
 

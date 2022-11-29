@@ -31,6 +31,8 @@ public:
 
     void UpdateLines(int _amountLines);
 
+    void LineLineIntersection();
+
 };
 
 
