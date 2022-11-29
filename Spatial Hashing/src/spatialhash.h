@@ -12,16 +12,11 @@
 class SpatialHashing
 {
 public:
-    int amountCells;
-    Vector2 screenDimensions;
-
     SpatialHashing(Vector2 _screenDimensions, int _amountCells);
 
     void RenderCells();
-
-    void GenerateCells();
-
-    void DrawCells();
+    void UpdateSpatialHashing(int _amountCells);
+    //void SearchLinesInCells
 
 private:
     struct Cell
@@ -32,7 +27,12 @@ private:
         Vector3 color;
     };
     Cell *cell;
-};
 
+    int amountCells;
+    Vector2 screenDimensions;
+
+    void GenerateCells();
+    void DrawCells();
+};
 
 #endif

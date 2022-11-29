@@ -11,6 +11,15 @@
 class LinesManager
 {
 public:
+    int amountLines;
+    Vector2 screenDimensions;
+
+    LinesManager(Vector2 _screenDimensions, int _amountLines);
+
+    void RenderLines();
+    void UpdateLines(int _amountLines);
+
+private:
     struct Line
     {
         Vector2 startLine;
@@ -18,22 +27,9 @@ public:
     };
     Line *line;
 
-    int amountLines;
-    Vector2 screenDimensions;
-
-    LinesManager(Vector2 _screenDimensions, int _amountLines);
-
-    void RenderLines();
-
     void GenerateLines();
-
     void ShowLines();
-
-    void UpdateLines(int _amountLines);
-
     void LineLineIntersection();
-
 };
-
 
 #endif

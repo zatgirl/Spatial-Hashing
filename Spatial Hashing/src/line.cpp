@@ -13,13 +13,19 @@ void LinesManager::RenderLines()
     LinesManager::LineLineIntersection();
 }
 
+void LinesManager::UpdateLines(int _amountLines)
+{
+    this->amountLines = _amountLines;
+    LinesManager::GenerateLines();
+}
+
 ///Voltar e arrumar, gerando apenas retas de 0° a 90°
 void LinesManager::GenerateLines()
 {
     for(int generatedLines = 0; generatedLines < this->amountLines; generatedLines ++)
     {
         line[generatedLines].startLine = Vector2(rand() % (int)this->screenDimensions.x, rand() % (int)this->screenDimensions.y);
-        line[generatedLines].endLine = Vector2(rand() % 50 + line[generatedLines].startLine.x, rand() % 50 + line[generatedLines].startLine.y);
+        line[generatedLines].endLine = Vector2(rand() % 100 + line[generatedLines].startLine.x, rand() % 100 + line[generatedLines].startLine.y);
     }
 }
 
@@ -34,7 +40,7 @@ void LinesManager::ShowLines()
 
 void LinesManager::LineLineIntersection()
 {
-    ///TxT
+    ///Todos contra Todos
     for(int firstSegment = 0; firstSegment < this->amountLines; firstSegment++)
     {
         for(int secondSegment = 0; secondSegment < this->amountLines; secondSegment++)
@@ -58,10 +64,3 @@ void LinesManager::LineLineIntersection()
         }
     }
 }
-
-void LinesManager::UpdateLines(int _amountLines)
-{
-    this->amountLines = _amountLines;
-    LinesManager::GenerateLines();
-}
-

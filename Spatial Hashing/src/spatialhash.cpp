@@ -13,6 +13,13 @@ void SpatialHashing::RenderCells()
     SpatialHashing::DrawCells();
 }
 
+void SpatialHashing::UpdateSpatialHashing(int _amountCells){
+    this->amountCells = _amountCells;
+    cell = new Cell[_amountCells * _amountCells];
+
+    SpatialHashing::GenerateCells();
+}
+
 void SpatialHashing::GenerateCells()
 {
     int index = 0;

@@ -52,7 +52,16 @@ void render()
 
 void keyboard(int key)
 {
-
+    switch(key){
+        case 113: /// q
+            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS+=1);
+            printf("%d\n", AMOUNT_CELLS);
+            break;
+        case 97:  /// a
+            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS-=1);
+            printf("%d\n", AMOUNT_CELLS);
+            break;
+    }
 }
 
 void keyboardUp(int key)
