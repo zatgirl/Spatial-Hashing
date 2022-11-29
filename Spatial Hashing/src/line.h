@@ -16,17 +16,20 @@ public:
         Vector2 startLine;
         Vector2 endLine;
     };
-    Line line[];
+    Line *line;
 
-    Vector2 dimensionScreen;
+    int amountLines;
+    Vector2 screenDimensions;
 
-    LinesManager();
+    LinesManager(Vector2 _screenDimensions, int _amountLines);
 
-    void renderLines();
+    void RenderLines();
 
-    void generateLines(int _amountLines);
+    void GenerateLines();
 
-    void showLines(int _amountLines);
+    void ShowLines();
+
+    void UpdateLines(int _amountLines);
 
 };
 

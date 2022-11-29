@@ -1,5 +1,10 @@
 #include "spatialhash.h"
 
-void generateCells(int width, int height){
+SpatialHashing::SpatialHashing(Vector2 _screenDimensions, int _amountCells){
+    this->screenDimensions = _screenDimensions;
+    this->amountCells = _amountCells;
+}
+
+void SpatialHashing::GenerateCells(){
 
 }

@@ -10,8 +10,12 @@
 class SpatialHashing
 {
 public:
-    int _amountCells;
-    void generateCells(int width, int height);
+    int amountCells;
+    Vector2 screenDimensions;
+
+    SpatialHashing(Vector2 _screenDimensions, int _amountCells);
+
+    void GenerateCells();
 
 private:
     struct Cell

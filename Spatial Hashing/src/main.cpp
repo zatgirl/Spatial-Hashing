@@ -28,15 +28,18 @@
 #include "Frames.h"
 #include "line.h"
 
+#define AMOUNT_LINES 50
+
 int screenWidth = 1200, screenHeight = 700;
 bool click = false;
 float fps;
 
 Frames *frames;
+LinesManager *linesManager;
 
 void render()
 {
-
+    linesManager->RenderLines();
     fps = frames->getFrames();
 
 }
@@ -59,11 +62,11 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
-
     frames = new Frames();
-
+    linesManager = new LinesManager(Vector2(screenWidth, screenHeight), AMOUNT_LINES);
 
     CV::init(&screenWidth, &screenHeight, "T2 - Spatial Hashing");
     CV::run();
+
     return 0;
 }
