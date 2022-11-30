@@ -9,16 +9,12 @@
 
 #include "gl_canvas2d.h"
 
+#define MAXCELLS 50
+#define SIZE_HASH 1000000
+
 class SpatialHashing
 {
 public:
-    SpatialHashing(Vector2 _screenDimensions, int _amountCells);
-
-    void RenderCells();
-    void UpdateSpatialHashing(int _amountCells);
-    //void SearchLinesInCells
-
-private:
     struct Cell
     {
         Vector2 points[];
@@ -26,8 +22,20 @@ private:
         Vector2 maxBoundary;
         Vector3 color;
     };
-    Cell *cell;
+    Cell *cells;
 
+    struct Hash{
+        int usage[MAXCELLS], initialIndex[MAXCELLS], finalIndex[MAXCELLS];
+        int hashTable[SIZE_HASH];
+    };
+    Hash *hashh;
+
+    SpatialHashing(Vector2 _screenDimensions, int _amountCells);
+
+    void RenderCells();
+    void UpdateSpatialHashing(int _amountCells);
+
+private:
     int amountCells;
     Vector2 screenDimensions;
 

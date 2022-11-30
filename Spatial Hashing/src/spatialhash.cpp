@@ -3,7 +3,7 @@
 SpatialHashing::SpatialHashing(Vector2 _screenDimensions, int _amountCells){
     this->screenDimensions = _screenDimensions;
     this->amountCells = _amountCells;
-    cell = new Cell[_amountCells * _amountCells];
+    cells = new Cell[_amountCells * _amountCells];
 
     SpatialHashing::GenerateCells();
 }
@@ -15,7 +15,7 @@ void SpatialHashing::RenderCells()
 
 void SpatialHashing::UpdateSpatialHashing(int _amountCells){
     this->amountCells = _amountCells;
-    cell = new Cell[_amountCells * _amountCells];
+    cells = new Cell[_amountCells * _amountCells];
 
     SpatialHashing::GenerateCells();
 }
@@ -33,9 +33,9 @@ void SpatialHashing::GenerateCells()
             float tempMinX = X * incrementoX;
             float tempMinY = Y * incrementoY;
 
-            cell[index].minBoundary = Vector2(tempMinX, tempMinY);
-            cell[index].maxBoundary = Vector2(tempMinX + incrementoX, tempMinY + incrementoY);
-            cell[index].color = Vector3(((rand() % 10) / 10.0), ((rand() % 10) / 10.0), ((rand() % 10) / 10.0));
+            cells[index].minBoundary = Vector2(tempMinX, tempMinY);
+            cells[index].maxBoundary = Vector2(tempMinX + incrementoX, tempMinY + incrementoY);
+            cells[index].color = Vector3(((rand() % 10) / 10.0), ((rand() % 10) / 10.0), ((rand() % 10) / 10.0));
             index ++;
         }
     }
@@ -44,7 +44,7 @@ void SpatialHashing::GenerateCells()
 void SpatialHashing::DrawCells(){
     for(int index = 0; index < this->amountCells * this->amountCells; index++)
     {
-        CV::color(cell[index].color.x, cell[index].color.y, cell[index].color.z);
-        CV::rectFill(cell[index].minBoundary, cell[index].maxBoundary);
+        CV::color(cells[index].color.x, cells[index].color.y, cells[index].color.z);
+        CV::rectFill(cells[index].minBoundary, cells[index].maxBoundary);
     }
 }

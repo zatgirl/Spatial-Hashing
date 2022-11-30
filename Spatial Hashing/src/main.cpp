@@ -29,13 +29,14 @@
 #include "line.h"
 #include "spatialhash.h"
 
-#define AMOUNT_LINES 500
 
 int screenWidth = 1200, screenHeight = 700;
 bool click = false;
 float fps;
 
+int AMOUNT_LINES = 1;
 int AMOUNT_CELLS = 3; ///por orientação
+
 
 Frames *frames;
 LinesManager *linesManager;
@@ -44,6 +45,7 @@ SpatialHashing *spatialHashing;
 void render()
 {
     spatialHashing->RenderCells();
+
     linesManager->RenderLines();
 
     fps = frames->getFrames();
@@ -55,11 +57,17 @@ void keyboard(int key)
     switch(key){
         case 113: /// q
             spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS+=1);
-            printf("%d\n", AMOUNT_CELLS);
+            linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
             break;
         case 97:  /// a
             spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS-=1);
-            printf("%d\n", AMOUNT_CELLS);
+            linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
+            break;
+        case 119: /// w
+            linesManager->UpdateLines(AMOUNT_LINES+=1);
+            break;
+        case 115: /// s
+            linesManager->UpdateLines(AMOUNT_LINES-=1);
             break;
     }
 }
@@ -80,6 +88,8 @@ int main(void)
     frames = new Frames();
     linesManager = new LinesManager(Vector2(screenWidth, screenHeight), AMOUNT_LINES);
     spatialHashing = new SpatialHashing(Vector2(screenWidth, screenHeight), AMOUNT_CELLS);
+
+    linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
 
     CV::init(&screenWidth, &screenHeight, "T2 - Spatial Hashing");
     CV::run();
