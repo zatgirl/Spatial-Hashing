@@ -101,14 +101,13 @@ void LinesManager::SearchLinesInCells(SpatialHashing::Cell *cellsTemp, int cells
                 if((index != line[segment].usage[0]) && (index != line[segment].usage[1]))
                 {
                     line[segment].usage.push_back(index);
-                    printf("here\n");
                 }
             }
         }
     }
 
-    ///Puramente debug
-    printf("celulas em que passa:\n");
+    ///Puramente debug, apagar
+    printf("celulas ao redor da linha:\n");
     for(int segment = 0; segment < this->amountLines; segment ++)
     {
         for(int i = 0; i < line[segment].usage.size(); i ++)
@@ -128,7 +127,7 @@ void LinesManager::SearchLinesInCells(SpatialHashing::Cell *cellsTemp, int cells
         }
     }
 
-    ///Puramente debug
+    ///Puramente debug, apagar
     printf("celulas em que REALMENTE passa:\n");
     for(int segment = 0; segment < this->amountLines; segment ++)
     {

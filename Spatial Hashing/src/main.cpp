@@ -67,7 +67,9 @@ void keyboard(int key)
             linesManager->UpdateLines(AMOUNT_LINES+=1);
             break;
         case 115: /// s
-            linesManager->UpdateLines(AMOUNT_LINES-=1);
+            if(AMOUNT_LINES - 1 > 0){
+                linesManager->UpdateLines(AMOUNT_LINES-=1);
+            }
             break;
     }
 }
