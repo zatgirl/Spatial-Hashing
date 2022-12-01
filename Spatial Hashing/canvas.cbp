@@ -44,7 +44,9 @@
 			<Add library="../lib/freeglut.lib" />
 		</Linker>
 		<Unit filename="include/GL/glut.h" />
+		<Unit filename="src/Button.h" />
 		<Unit filename="src/Frames.h" />
+		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Vector2.h" />
 		<Unit filename="src/Vector3.h" />
 		<Unit filename="src/gl_canvas2d.cpp" />
@@ -52,6 +54,7 @@
 		<Unit filename="src/line.cpp" />
 		<Unit filename="src/line.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/scene.h" />
 		<Unit filename="src/spatialhash.cpp" />
 		<Unit filename="src/spatialhash.h" />
 		<Extensions>

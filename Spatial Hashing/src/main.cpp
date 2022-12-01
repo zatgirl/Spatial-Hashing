@@ -29,47 +29,57 @@
 #include "line.h"
 #include "spatialhash.h"
 
+#include "Scene.h"
 
-int screenWidth = 1200, screenHeight = 700;
+
+int screenWidth = 1800, screenHeight = 900;
 bool click = false;
 float fps;
 
-int AMOUNT_LINES = 1;
+int AMOUNT_LINES = 2;
 int AMOUNT_CELLS = 3; ///por orientação
 
-
+Scene *scene;
 Frames *frames;
 LinesManager *linesManager;
 SpatialHashing *spatialHashing;
 
 void render()
 {
+    scene->render();
     spatialHashing->RenderCells();
 
     linesManager->RenderLines();
 
     fps = frames->getFrames();
-
+    scene->ShowFrames(fps, screenWidth, screenHeight);
 }
 
 void keyboard(int key)
 {
     switch(key){
         case 113: /// q
-            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS+=1);
-            linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
+            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS +=1);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
             break;
         case 97:  /// a
-            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS-=1);
-            linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
+            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS -= 1);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
             break;
         case 119: /// w
-            linesManager->UpdateLines(AMOUNT_LINES+=1);
+            linesManager->UpdateLines(AMOUNT_LINES += 100);
             break;
         case 115: /// s
             if(AMOUNT_LINES - 1 > 0){
-                linesManager->UpdateLines(AMOUNT_LINES-=1);
+                linesManager->UpdateLines(AMOUNT_LINES -= 100);
             }
+            break;
+        case 116: /// t > resize na tela
+            spatialHashing->screenDimensions = Vector2(screenWidth - 350, screenHeight);
+            spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS += 1);
+            linesManager->screenDimensions = Vector2(screenWidth - 350, screenHeight);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
+            scene->screenDimensions = Vector2(screenWidth, screenHeight);
             break;
     }
 }
@@ -87,11 +97,12 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
+    scene = new Scene(screenWidth, screenHeight);
     frames = new Frames();
-    linesManager = new LinesManager(Vector2(screenWidth, screenHeight), AMOUNT_LINES);
-    spatialHashing = new SpatialHashing(Vector2(screenWidth, screenHeight), AMOUNT_CELLS);
+    linesManager = new LinesManager(Vector2(screenWidth - 350, screenHeight), AMOUNT_LINES);
+    spatialHashing = new SpatialHashing(Vector2(screenWidth - 350, screenHeight), AMOUNT_CELLS);
 
-    linesManager->SearchLinesInCells(spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS);
+    spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
 
     CV::init(&screenWidth, &screenHeight, "T2 - Spatial Hashing");
     CV::run();
