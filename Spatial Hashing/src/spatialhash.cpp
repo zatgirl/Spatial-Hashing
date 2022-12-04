@@ -204,7 +204,8 @@ std::vector<int> SpatialHashing::UsedCells(Vector2 startLine, Vector2 endLine, s
     return usage;
 }
 
-void SpatialHashing::FeedHash()
+void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHashing::Cell *cells, int cellsCount, int amountLines)
 {
+    SpatialHashing::SearchLinesInCells(lines, cellsCount, amountLines);
 
 }

@@ -39,7 +39,7 @@ public:
     void RenderCells();
     void UpdateSpatialHashing(int _amountCells);
     void SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount, int amountLines);
-    void FeedHash();
+    void SpatialHashingUpdate(LinesManager::Line *lines, Cell *cells, int cellsCount, int amountLines);
 
 private:
     int amountCells;
