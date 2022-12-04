@@ -38,20 +38,19 @@ public:
 
     void RenderCells();
     void UpdateSpatialHashing(int _amountCells);
-    void SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount);
+    void SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount, int amountLines);
     void FeedHash();
 
 private:
     int amountCells;
 
-
     void GenerateCells();
     void DrawCells();
 
     bool LineLineIntersection(Vector2 firstSegmentStart, Vector2 firstSegmentEnd, Vector2 secondSegmentStart, Vector2 secondSegmentEnd);
-    bool VertexInsideRectangle(Vector2 Vertex, LinesManager::Line line);
+    bool VertexInsideRectangle(Vector2 Vertex, Cell cell);
     bool CellAroundLine(Vector2 minBoudingCell, Vector2 maxBoudingCell, Vector2 minBoudingLine, Vector2 maxBoudingLine);
-    std::vector<int> UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, LinesManager::Line *lines);
+    std::vector<int> UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, Cell *cells);
 
 };
 

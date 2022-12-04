@@ -60,11 +60,11 @@ void keyboard(int key)
     switch(key){
         case 113: /// q
             spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS +=1);
-            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
             break;
         case 97:  /// a
             spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS -= 1);
-            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
             break;
         case 119: /// w
             linesManager->UpdateLines(AMOUNT_LINES += 100);
@@ -78,7 +78,7 @@ void keyboard(int key)
             spatialHashing->screenDimensions = Vector2(screenWidth - 350, screenHeight);
             spatialHashing->UpdateSpatialHashing(AMOUNT_CELLS += 1);
             linesManager->screenDimensions = Vector2(screenWidth - 350, screenHeight);
-            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
+            spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
             scene->screenDimensions = Vector2(screenWidth, screenHeight);
             break;
     }
@@ -102,7 +102,7 @@ int main(void)
     linesManager = new LinesManager(Vector2(screenWidth - 350, screenHeight), AMOUNT_LINES);
     spatialHashing = new SpatialHashing(Vector2(screenWidth - 350, screenHeight), AMOUNT_CELLS);
 
-    spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS);
+    spatialHashing->SearchLinesInCells(linesManager->lines, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
 
     CV::init(&screenWidth, &screenHeight, "T2 - Spatial Hashing");
     CV::run();

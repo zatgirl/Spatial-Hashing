@@ -54,39 +54,39 @@ void SpatialHashing::DrawCells()
     }
 }
 
-void SpatialHashing::SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount)
+void SpatialHashing::SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount, int amountLines)
 {
     ///Primeiro busca em quais células então os vértices de cada linha
-    for(int segment = 0; segment < this->amountLines; segment ++)
+    for(int segment = 0; segment < amountLines; segment ++)
     {
-        lines[segment].CellsPassedByLine.clear();
+        linesTemp[segment].CellsPassedByLine.clear();
         for(int index = 0; index < cellsCount; index ++)
         {
-            if(LinesManager::VertexInsideRectangle(lines[segment].startLine, cellsTemp[index]))
+            if(SpatialHashing::VertexInsideRectangle(linesTemp[segment].startLine, cells[index]))
             {
-                lines[segment].CellsPassedByLine.push_back(index);
+                linesTemp[segment].CellsPassedByLine.push_back(index);
             }
-            if(LinesManager::VertexInsideRectangle(lines[segment].endLine, cellsTemp[index]))
+            if(SpatialHashing::VertexInsideRectangle(linesTemp[segment].endLine, cells[index]))
             {
-                lines[segment].CellsPassedByLine.push_back(index);
+                linesTemp[segment].CellsPassedByLine.push_back(index);
             }
         }
     }
 
     ///Checa com as células vizinhas se ocorreu intersecção
-    for(int segment = 0; segment < this->amountLines; segment ++)
+    for(int segment = 0; segment < amountLines; segment ++)
     {
         for(int index = 0; index < cellsCount; index ++)
         {
-            Vector2 minBoudingLine = (lines[segment].CellsPassedByLine[0] < lines[segment].CellsPassedByLine[1]) ? cellsTemp[lines[segment].CellsPassedByLine[0]].minBoundary : cellsTemp[lines[segment].CellsPassedByLine[1]].minBoundary;
-            Vector2 maxBoudingLine = (lines[segment].CellsPassedByLine[0] < lines[segment].CellsPassedByLine[1]) ? cellsTemp[lines[segment].CellsPassedByLine[1]].maxBoundary : cellsTemp[lines[segment].CellsPassedByLine[0]].maxBoundary;
+            Vector2 minBoudingLine = (linesTemp[segment].CellsPassedByLine[0] < linesTemp[segment].CellsPassedByLine[1]) ? cells[linesTemp[segment].CellsPassedByLine[0]].minBoundary : cells[linesTemp[segment].CellsPassedByLine[1]].minBoundary;
+            Vector2 maxBoudingLine = (linesTemp[segment].CellsPassedByLine[0] < linesTemp[segment].CellsPassedByLine[1]) ? cells[linesTemp[segment].CellsPassedByLine[1]].maxBoundary : cells[linesTemp[segment].CellsPassedByLine[0]].maxBoundary;
 
             ///Testa se a célula está no limite de vizinhos
-            if(LinesManager::CellAroundLine(cellsTemp[index].minBoundary, cellsTemp[index].maxBoundary, minBoudingLine, maxBoudingLine))
+            if(SpatialHashing::CellAroundLine(cells[index].minBoundary, cells[index].maxBoundary, minBoudingLine, maxBoudingLine))
             {
-                if((index != lines[segment].CellsPassedByLine[0]) && (index != lines[segment].CellsPassedByLine[1]))
+                if((index != linesTemp[segment].CellsPassedByLine[0]) && (index != linesTemp[segment].CellsPassedByLine[1]))
                 {
-                    lines[segment].CellsPassedByLine.push_back(index);
+                    linesTemp[segment].CellsPassedByLine.push_back(index);
                 }
             }
         }
@@ -94,30 +94,30 @@ void SpatialHashing::SearchLinesInCells(LinesManager::Line *linesTemp, int cells
 
     ///Puramente debug, apagar
     //printf("celulas ao redor da linha:\n");
-    for(int segment = 0; segment < this->amountLines; segment ++)
+    for(int segment = 0; segment < amountLines; segment ++)
     {
-        for(int i = 0; i < lines[segment].CellsPassedByLine.size(); i ++)
+        for(int i = 0; i < linesTemp[segment].CellsPassedByLine.size(); i ++)
         {
           // printf("%d\n", line[segment].CellsPassedByLine[i]);
         }
     }
 
     ///Percorre a bouding de celulas
-    for(int segment = 0; segment < this->amountLines; segment ++)
+    for(int segment = 0; segment < amountLines; segment ++)
     {
-        for(int i = 0; i < lines[segment].CellsPassedByLine.size(); i ++)
+        for(int i = 0; i < linesTemp[segment].CellsPassedByLine.size(); i ++)
         {
-            std::vector<int> tempUsage = LinesManager::UsedCells(lines[segment].startLine, lines[segment].endLine, lines[segment].CellsPassedByLine, cellsTemp);
-            lines[segment].CellsPassedByLine.clear();
-            lines[segment].CellsPassedByLine = tempUsage;
+            std::vector<int> tempUsage = SpatialHashing::UsedCells(linesTemp[segment].startLine, linesTemp[segment].endLine, linesTemp[segment].CellsPassedByLine, cells);
+            linesTemp[segment].CellsPassedByLine.clear();
+            linesTemp[segment].CellsPassedByLine = tempUsage;
         }
     }
 
     ///Puramente debug, apagar
     //printf("celulas em que REALMENTE passa:\n");
-    for(int segment = 0; segment < this->amountLines; segment ++)
+    for(int segment = 0; segment < amountLines; segment ++)
     {
-        for(int i = 0; i < lines[segment].CellsPassedByLine.size(); i ++)
+        for(int i = 0; i < linesTemp[segment].CellsPassedByLine.size(); i ++)
         {
       //     printf("%d\n", line[segment].usage[i]);
         }
@@ -126,7 +126,7 @@ void SpatialHashing::SearchLinesInCells(LinesManager::Line *linesTemp, int cells
 }
 
 ///Teste AABB
-bool SpatialHashing::VertexInsideRectangle(Vector2 Vertex, LinesManager::Line cell)
+bool SpatialHashing::VertexInsideRectangle(Vector2 Vertex, SpatialHashing::Cell cell)
 {
     if((Vertex.x > cell.minBoundary.x) && (Vertex.x < cell.maxBoundary.x))
     {
@@ -170,7 +170,7 @@ bool SpatialHashing::LineLineIntersection(Vector2 firstSegmentStart, Vector2 fir
     return false;
 }
 
-std::vector<int> SpatialHashing::UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, LinesManager::lines *lines)
+std::vector<int> SpatialHashing::UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, SpatialHashing::Cell *cell)
 {
     std::vector<int> usage;
     for(int index = 0; index < boudingCells.size(); index ++)
@@ -180,22 +180,22 @@ std::vector<int> SpatialHashing::UsedCells(Vector2 startLine, Vector2 endLine, s
         Vector2 v2 = cell[boudingCells[index]].maxBoundary;
         Vector2 v3 = Vector2(cell[boudingCells[index]].minBoundary.x, cell[boudingCells[index]].maxBoundary.y);
 
-        if(LinesManager::LineLineIntersection(startLine, endLine, v0, v1))
+        if(SpatialHashing::LineLineIntersection(startLine, endLine, v0, v1))
         {
             usage.push_back(boudingCells[index]);
             continue;
         }
-        if(LinesManager::LineLineIntersection(startLine, endLine, v1, v2))
+        if(SpatialHashing::LineLineIntersection(startLine, endLine, v1, v2))
         {
             usage.push_back(boudingCells[index]);
             continue;
         }
-        if(LinesManager::LineLineIntersection(startLine, endLine, v2, v3))
+        if(SpatialHashing::LineLineIntersection(startLine, endLine, v2, v3))
         {
             usage.push_back(boudingCells[index]);
             continue;
         }
-        if(LinesManager::LineLineIntersection(startLine, endLine, v3, v0))
+        if(SpatialHashing::LineLineIntersection(startLine, endLine, v3, v0))
         {
             usage.push_back(boudingCells[index]);
             continue;
