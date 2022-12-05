@@ -761,3 +761,96 @@
 1670182388 c:\users\admin\documents\github\spatial-hashing\spatial hashing\src\button.h
 	"gl_canvas2d.h"
 
+1669779568 source:d:\documentos\github\spatial-hashing\spatial hashing\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<iostream>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+	"Vector3.h"
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\include\gl\glut.h
+	"freeglut_std.h"
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1669947060 d:\documentos\github\spatial-hashing\spatial hashing\src\vector2.h
+	<math.h>
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\src\vector3.h
+
+1670193606 source:d:\documentos\github\spatial-hashing\spatial hashing\src\line.cpp
+	"line.h"
+
+1669947060 d:\documentos\github\spatial-hashing\spatial hashing\src\line.h
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	"Vector2.h"
+	"gl_canvas2d.h"
+
+1670193606 source:d:\documentos\github\spatial-hashing\spatial hashing\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	"gl_canvas2d.h"
+	"Vector2.h"
+	"Vector3.h"
+	"Frames.h"
+	"line.h"
+	"spatialhash.h"
+	"Scene.h"
+
+1669779568 d:\documentos\github\spatial-hashing\spatial hashing\src\frames.h
+	<stdio.h>
+	<time.h>
+
+1670201493 d:\documentos\github\spatial-hashing\spatial hashing\src\spatialhash.h
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	"Vector2.h"
+	"vector3.h"
+	"line.h"
+	"gl_canvas2d.h"
+
+1669947060 d:\documentos\github\spatial-hashing\spatial hashing\src\scene.h
+	<iostream>
+	<cstdio>
+	<cstdlib>
+	<vector>
+	<cstring>
+	"Vector2.h"
+	"Button.h"
+
+1669947060 d:\documentos\github\spatial-hashing\spatial hashing\src\button.h
+	"gl_canvas2d.h"
+
+1669947060 source:d:\documentos\github\spatial-hashing\spatial hashing\src\scene.cpp
+	"Scene.h"
+
+1670192933 source:d:\documentos\github\spatial-hashing\spatial hashing\src\spatialhash.cpp
+	"spatialhash.h"
+

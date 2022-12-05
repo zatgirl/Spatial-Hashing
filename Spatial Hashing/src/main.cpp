@@ -36,7 +36,7 @@ int screenWidth = 1800, screenHeight = 900;
 bool click = false;
 float fps;
 
-int AMOUNT_LINES = 2;
+int AMOUNT_LINES = 1;
 int AMOUNT_CELLS = 3; ///por orientação
 
 Scene *scene;

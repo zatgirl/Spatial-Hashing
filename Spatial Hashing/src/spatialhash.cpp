@@ -5,6 +5,7 @@ SpatialHashing::SpatialHashing(Vector2 _screenDimensions, int _amountCells)
     this->screenDimensions = _screenDimensions;
     this->amountCells = _amountCells;
     cells = new Cell[_amountCells * _amountCells];
+    hashT = new Hash();
 
     SpatialHashing::GenerateCells();
 }
@@ -119,7 +120,7 @@ void SpatialHashing::SearchLinesInCells(LinesManager::Line *linesTemp, int cells
     {
         for(int i = 0; i < linesTemp[segment].CellsPassedByLine.size(); i ++)
         {
-      //     printf("%d\n", line[segment].usage[i]);
+           //printf("%d\n", linesTemp[segment].CellsPassedByLine[i]);
         }
     }
 
@@ -206,6 +207,9 @@ std::vector<int> SpatialHashing::UsedCells(Vector2 startLine, Vector2 endLine, s
 
 void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHashing::Cell *cells, int cellsCount, int amountLines)
 {
-    SpatialHashing::SearchLinesInCells(lines, cellsCount, amountLines);
+    //SpatialHashing::SearchLinesInCells(lines, cellsCount, amountLines);
+    for (int segment = 0; segment < amountLines; segment ++){
+         hashT->usage[segment] = qtd_lines_segment;
+    }
 
 }

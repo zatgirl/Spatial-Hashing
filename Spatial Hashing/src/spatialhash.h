@@ -30,7 +30,7 @@ public:
         int usage[MAXCELLS], initialIndex[MAXCELLS], finalIndex[MAXCELLS];
         int hashTable[SIZE_HASH];
     };
-    Hash *hashh;
+    Hash *hashT;
 
     Vector2 screenDimensions;
 

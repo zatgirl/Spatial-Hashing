@@ -11,7 +11,7 @@ LinesManager::LinesManager(Vector2 _screenDimensions, int _amountLines)
 void LinesManager::RenderLines()
 {
     LinesManager::ShowLines();
-    LinesManager::LineLineIntersection();
+    //LinesManager::LineLineIntersection();
 }
 
 void LinesManager::UpdateLines(int _amountLines)
