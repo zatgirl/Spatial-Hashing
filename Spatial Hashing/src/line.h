@@ -17,6 +17,7 @@ public:
         Vector2 startLine;
         Vector2 endLine;
         int CellsPassedByLine[DEF_MAX_CELLS_PASSED_BY_LINES]; ///Guarda o índice das células o segmento de linha passa
+        int AmountCellsPassed;
     };
     Line *lines;
 

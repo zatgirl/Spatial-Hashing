@@ -217,6 +217,7 @@ void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHash
             lines[segment].CellsPassedByLine[indexCellsPassed] = cellsPassedByLineTemp[indexCellsPassed];
             hashT->usage[cellsPassedByLineTemp[indexCellsPassed]] ++;
         }
+        lines[segment].AmountCellsPassed = cellsPassedByLineTemp.size();
     }
 
     ///Segundo for do artigo
@@ -230,10 +231,10 @@ void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHash
     ///Terceiro for do artigo
     for (int segment = 0; segment < amountLines; segment ++)
     {
-        for(int cell = 0; cell < sizeof(lines[segment].CellsPassedByLine); cell ++)
+        for(int cell = 0; cell < lines[segment].AmountCellsPassed; cell ++)
         {
-            hashT->hashTable[hashT->finalIndex[cell] - 1] = segment;
-            hashT->finalIndex[cell] --;
+            hashT->hashTable[hashT->finalIndex[lines[segment].CellsPassedByLine[cell]] - 1] = segment;
+            hashT->finalIndex[lines[segment].CellsPassedByLine[cell]] --;
         }
     }
 }
