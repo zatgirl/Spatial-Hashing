@@ -211,23 +211,30 @@ void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHash
     ///Primeiro for do artigo
     for (int segment = 0; segment < amountLines; segment ++)
     {
-        for(int indexCell = 0; indexCell < cellsCount; cellsCount++)
+        std::vector<int> cellsPassedByLineTemp = SpatialHashing::CellsPassedByLine(lines[segment], cells, cellsCount, amountLines);
+        for(int indexCellsPassed = 0; indexCellsPassed < cellsPassedByLineTemp.size(); indexCellsPassed ++)
         {
-            std::vector<int> cellsPassedByLineTemp = SpatialHashing::CellsPassedByLine(lines[segment], cells, cellsCount, amountLines);
-            for(int indexCellsPassed = 0; indexCellsPassed < cellsPassedByLineTemp.size(); indexCellsPassed ++)
-            {
-                lines[segment].CellsPassedByLine[indexCellsPassed] = cellsPassedByLineTemp[indexCellsPassed];
-                hashT->usage[indexCell] = (cellsPassedByLineTemp[indexCellsPassed] == indexCell) ? hashT->usage[indexCell] + 1 : hashT->usage[indexCell];
-            }
+            lines[segment].CellsPassedByLine[indexCellsPassed] = cellsPassedByLineTemp[indexCellsPassed];
+            hashT->usage[cellsPassedByLineTemp[indexCellsPassed]] ++;
         }
     }
 
     ///Segundo for do artigo
-    for (int indexCell = 0, accum = 0; indexCell < cellsCount; indexCell ++)
+    for (int cell = 0, accum = 0; cell < cellsCount; cell ++)
     {
-        hashT->initialIndex[indexCell] = accum;
-        accum += hashT->usage[indexCell];
-        hashT->finalIndex[indexCell] = accum;
+        hashT->initialIndex[cell] = accum;
+        accum += hashT->usage[cell];
+        hashT->finalIndex[cell] = accum;
+    }
+
+    ///Terceiro for do artigo
+    for (int segment = 0; segment < amountLines; segment ++)
+    {
+        for(int cell = 0; cell < sizeof(lines[segment].CellsPassedByLine); cell ++)
+        {
+            hashT->hashTable[hashT->finalIndex[cell] - 1] = segment;
+            hashT->finalIndex[cell] --;
+        }
     }
 }
 
