@@ -223,9 +223,11 @@ void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHash
     }
 
     ///Segundo for do artigo
-    for ()
+    for (int indexCell = 0, accum = 0; indexCell < cellsCount; indexCell ++)
     {
-
+        hashT->initialIndex[indexCell] = accum;
+        accum += hashT->usage[indexCell];
+        hashT->finalIndex[indexCell] = accum;
     }
 }
 
