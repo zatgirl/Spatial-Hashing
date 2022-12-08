@@ -41,6 +41,10 @@ public:
     void SearchLinesInCells(LinesManager::Line *linesTemp, int cellsCount, int amountLines);
     void SpatialHashingUpdate(LinesManager::Line *lines, Cell *cells, int cellsCount, int amountLines);
 
+    int AmountLines(LinesManager::Line line, Cell *cells, int cellsCount, int amountLines);
+    std::vector<int> CellsPassedByLine (LinesManager::Line line, Cell *cells, int cellsCount, int amountLines);
+
+
 private:
     int amountCells;
 

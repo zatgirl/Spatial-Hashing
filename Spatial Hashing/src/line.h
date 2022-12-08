@@ -7,6 +7,7 @@
 #include "Vector2.h"
 
 #include "gl_canvas2d.h"
+#define DEF_MAX_CELLS_PASSED_BY_LINES 100
 
 class LinesManager
 {
@@ -15,7 +16,7 @@ public:
     {
         Vector2 startLine;
         Vector2 endLine;
-        std::vector<int> CellsPassedByLine; ///Guarda o índice das células o segmento de linha passa
+        int CellsPassedByLine[DEF_MAX_CELLS_PASSED_BY_LINES]; ///Guarda o índice das células o segmento de linha passa
     };
     Line *lines;
 
