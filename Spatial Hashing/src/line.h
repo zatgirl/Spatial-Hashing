@@ -28,11 +28,11 @@ public:
 
     void RenderLines();
     void UpdateLines(int _amountLines);
-
+    void GenerateLines();
 
 private:
 
-    void GenerateLines();
+
     void ShowLines();
 
     void LineLineIntersection();

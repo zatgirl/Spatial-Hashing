@@ -42,19 +42,26 @@ public:
     void SpatialHashingUpdate(LinesManager::Line *lines, Cell *cells, int cellsCount, int amountLines);
 
     int AmountLines(LinesManager::Line line, Cell *cells, int cellsCount, int amountLines);
-    std::vector<int> CellsPassedByLine (LinesManager::Line line, Cell *cells, int cellsCount, int amountLines);
+    std::vector<int> CellsPassedByLine (LinesManager::Line line, int cellsCount, int amountLines);
+
+    void LineLineIntersectionWithTable(LinesManager::Line *lines, int cellsCount);
+
+    void GenerateCells();
 
 
 private:
     int amountCells;
 
-    void GenerateCells();
     void DrawCells();
 
     bool LineLineIntersection(Vector2 firstSegmentStart, Vector2 firstSegmentEnd, Vector2 secondSegmentStart, Vector2 secondSegmentEnd);
+    void LineLineIntersectionWithMark(Vector2 firstSegmentStart, Vector2 firstSegmentEnd, Vector2 secondSegmentStart, Vector2 secondSegmentEnd);
     bool VertexInsideRectangle(Vector2 Vertex, Cell cell);
     bool CellAroundLine(Vector2 minBoudingCell, Vector2 maxBoudingCell, Vector2 minBoudingLine, Vector2 maxBoudingLine);
     std::vector<int> UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, Cell *cells);
+
+    void DestructStructHash();
+
 
 };
 

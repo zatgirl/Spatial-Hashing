@@ -5,13 +5,14 @@ LinesManager::LinesManager(Vector2 _screenDimensions, int _amountLines)
     this->screenDimensions = _screenDimensions;
     this->amountLines = _amountLines;
     lines = new Line[_amountLines];
+
     LinesManager::GenerateLines();
 }
 
 void LinesManager::RenderLines()
 {
     LinesManager::ShowLines();
-    LinesManager::LineLineIntersection();
+    //LinesManager::LineLineIntersection();
 }
 
 void LinesManager::UpdateLines(int _amountLines)
@@ -31,10 +32,10 @@ void LinesManager::GenerateLines()
         startY = rand() % (int)this->screenDimensions.y;
         lines[generatedLines].startLine = Vector2(startX, startY);
 
-        endX = rand() % 100 + lines[generatedLines].startLine.x;
+        endX = rand() % 200 + lines[generatedLines].startLine.x;
         endX = (endX > (int)this->screenDimensions.x) ? (int)this->screenDimensions.x : endX;
 
-        endY = rand() % 100 + lines[generatedLines].startLine.y;
+        endY = rand() % 200 + lines[generatedLines].startLine.y;
         endY = (endY > (int)this->screenDimensions.y) ? (int)this->screenDimensions.y : endY;
         lines[generatedLines].endLine = Vector2(endX, endY);
     }

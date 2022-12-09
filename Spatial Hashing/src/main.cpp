@@ -36,7 +36,7 @@ int screenWidth = 1800, screenHeight = 900;
 bool click = false;
 float fps;
 
-int AMOUNT_LINES = 1;
+int AMOUNT_LINES = 250;
 int AMOUNT_CELLS = 3; ///por orientação
 
 Scene *scene;
@@ -50,6 +50,8 @@ void render()
     spatialHashing->RenderCells();
 
     linesManager->RenderLines();
+
+    spatialHashing->LineLineIntersectionWithTable(linesManager->lines, AMOUNT_CELLS * AMOUNT_CELLS);
 
     fps = frames->getFrames();
     scene->ShowFrames(fps, screenWidth, screenHeight);
@@ -67,11 +69,13 @@ void keyboard(int key)
             spatialHashing->SpatialHashingUpdate(linesManager->lines, spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
             break;
         case 119: /// w
-            linesManager->UpdateLines(AMOUNT_LINES += 100);
+                linesManager->UpdateLines(AMOUNT_LINES += 10);
+                spatialHashing->SpatialHashingUpdate(linesManager->lines, spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
+
             break;
         case 115: /// s
             if(AMOUNT_LINES - 1 > 0){
-                linesManager->UpdateLines(AMOUNT_LINES -= 100);
+                linesManager->UpdateLines(AMOUNT_LINES -= 1);
             }
             break;
         case 116: /// t > resize na tela
@@ -101,6 +105,9 @@ int main(void)
     frames = new Frames();
     linesManager = new LinesManager(Vector2(screenWidth - 350, screenHeight), AMOUNT_LINES);
     spatialHashing = new SpatialHashing(Vector2(screenWidth - 350, screenHeight), AMOUNT_CELLS);
+
+    linesManager->GenerateLines();
+    spatialHashing->GenerateCells();
 
     spatialHashing->SpatialHashingUpdate(linesManager->lines, spatialHashing->cells, AMOUNT_CELLS*AMOUNT_CELLS, linesManager->amountLines);
 
