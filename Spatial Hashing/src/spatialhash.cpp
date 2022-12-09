@@ -55,7 +55,6 @@ void SpatialHashing::DrawCells()
     }
 }
 
-///Teste AABB
 bool SpatialHashing::VertexInsideRectangle(Vector2 Vertex, SpatialHashing::Cell cell)
 {
     if((Vertex.x > cell.minBoundary.x) && (Vertex.x < cell.maxBoundary.x))
@@ -172,12 +171,9 @@ void SpatialHashing::SpatialHashingUpdate(LinesManager::Line *lines, SpatialHash
     ///Segundo for do artigo
     for (int cell = 0, accum = 0; cell < cellsCount; cell ++)
     {
-      //  printf("hash usage cell[%d]: %d\n", cell, hashT->usage[cell]);
         hashT->initialIndex[cell] = accum;
-     //   printf("hash init cell[%d]: %d\n", cell, hashT->initialIndex[cell]);
         accum += hashT->usage[cell];
         hashT->finalIndex[cell] = accum;
-     //   printf("hash final cell[%d]: %d\n", cell, hashT->finalIndex[cell]);
     }
 
     ///Terceiro for do artigo
@@ -204,17 +200,25 @@ std::vector<int> SpatialHashing::CellsPassedByLine (LinesManager::Line line, int
         }
         if(SpatialHashing::VertexInsideRectangle(line.endLine, SpatialHashing::cells[index]))
         {
-            if(index != CellsPassedByLine[0])
+            if(CellsPassedByLine.size() > 0)
             {
-                CellsPassedByLine.push_back(index);
+                if(CellsPassedByLine[0] == index)
+                {
+                    return CellsPassedByLine;
+                }
             }
             else
             {
-                return CellsPassedByLine;
+                CellsPassedByLine.push_back(index);
             }
         }
     }
 
+    if((CellsPassedByLine.size() > 2) || (CellsPassedByLine.size() == 0)){
+        return CellsPassedByLine;
+    }
+    else
+    {
     ///Checa com as células vizinhas se ocorreu intersecção
     for(int index = 0; index < cellsCount; index ++)
     {
@@ -236,10 +240,12 @@ std::vector<int> SpatialHashing::CellsPassedByLine (LinesManager::Line line, int
     CellsPassedByLine = tempUsage;
 
     return CellsPassedByLine;
+    }
 }
 
 void SpatialHashing::LineLineIntersectionWithTable(LinesManager::Line *lines, int cellsCount)
 {
+    int intersection = 0;
     ///Todas x Todas linhas dentro de cada celula
     for (int cell = 0; cell < cellsCount; cell ++)
     {
@@ -253,7 +259,10 @@ void SpatialHashing::LineLineIntersectionWithTable(LinesManager::Line *lines, in
             {
                 Vector2 secondSegmentP1 = lines[hashT->hashTable[secondSegmentInCell]].startLine;
                 Vector2 secondSegmentP2 = lines[hashT->hashTable[secondSegmentInCell]].endLine;
-                SpatialHashing::LineLineIntersectionWithMark(firstSegmentP1, firstSegmentP2, secondSegmentP1, secondSegmentP2);
+                if(firstSegmentInCell != secondSegmentInCell)
+                {
+                    SpatialHashing::LineLineIntersectionWithMark(firstSegmentP1, firstSegmentP2, secondSegmentP1, secondSegmentP2);
+                }
             }
         }
     }

@@ -25,9 +25,6 @@ void Scene::UI(){
     CV::rectFill(0,0,screenDimensions.x,screenDimensions.y);
 }
 
-void Buttons(){
-}
-
 void Scene::ShowFrames(float fps, int screenWidth, int screenHeight){
     CV::color(1,1,0);
     CV::rectFill(screenWidth-51,screenHeight-23, screenWidth, screenHeight-3);
@@ -37,11 +34,8 @@ void Scene::ShowFrames(float fps, int screenWidth, int screenHeight){
 
 void Scene::ShowInstructions(){
     CV::color(0);
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 50, "CELLS");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 70, "LINES");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 90, "LINE COLLIDER");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 110, "[Q] ADD CELLS");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 130, "[A] INC CELLS");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 150, "[W] ADD LINES");
-    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 170, "[S] INC LINES");
+    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 50,  "[Q] ADD CELLS");
+    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 70,  "[A] INC CELLS");
+    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 90,  "[W] ADD LINES");
+    CV::text(this->screenDimensions.x - 340, this->screenDimensions.y - 110, "[S] INC LINES");
 }

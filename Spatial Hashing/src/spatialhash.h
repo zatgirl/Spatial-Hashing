@@ -10,8 +10,8 @@
 #include "line.h"
 #include "gl_canvas2d.h"
 
-#define MAXCELLS 50
-#define SIZE_HASH 1000000
+#define MAXCELLS 1000000
+#define SIZE_HASH 5000000
 
 class SpatialHashing
 {
@@ -53,16 +53,12 @@ private:
     int amountCells;
 
     void DrawCells();
-
     bool LineLineIntersection(Vector2 firstSegmentStart, Vector2 firstSegmentEnd, Vector2 secondSegmentStart, Vector2 secondSegmentEnd);
     void LineLineIntersectionWithMark(Vector2 firstSegmentStart, Vector2 firstSegmentEnd, Vector2 secondSegmentStart, Vector2 secondSegmentEnd);
     bool VertexInsideRectangle(Vector2 Vertex, Cell cell);
     bool CellAroundLine(Vector2 minBoudingCell, Vector2 maxBoudingCell, Vector2 minBoudingLine, Vector2 maxBoudingLine);
     std::vector<int> UsedCells(Vector2 startLine, Vector2 endLine, std::vector<int> boudingCells, Cell *cells);
-
     void DestructStructHash();
-
-
 };
 
 #endif

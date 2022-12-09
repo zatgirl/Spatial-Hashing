@@ -8,7 +8,7 @@
 #include <cstring>
 
 #include "Vector2.h"
-#include "Button.h"
+#include "gl_canvas2d.h"
 
 class Scene
 {
